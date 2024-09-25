@@ -1,0 +1,64 @@
+/* src/App.css */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.nav-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2mm;  /* 2mm space between buttons */
+  width: 100%;
+  max-width: 800px;  /* Limit the width */
+  padding: 10px;
+}
+
+.nav-buttons a {
+  text-decoration: none;
+  font-size: 16px;
+  color: white;
+}
+
+.nav-buttons .btn {
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.btn-dashboard {
+  background-color: #4CAF50; /* Green */
+}
+
+.btn-financial {
+  background-color: #2196F3; /* Blue */
+}
+
+.btn-stocks {
+  background-color: #f39c12; /* Orange */
+}
+
+.btn-macro {
+  background-color: #9b59b6; /* Purple */
+}
+
+.btn-corporate {
+  background-color: #e74c3c; /* Red */
+}
+
+.nav-buttons .btn:hover {
+  opacity: 0.9;
+}
+
+.container div {
+  text-align: center;
+}
