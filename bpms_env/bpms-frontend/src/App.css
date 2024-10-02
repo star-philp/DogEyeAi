@@ -1,64 +1,72 @@
-/* src/App.css */
+/* General body styling */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #f9f9f9;
 }
 
+/* Container styling */
 .container {
+  width: 90%;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Form layout improvements */
+form {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+form .form-group {
+  width: 48%; /* Makes two inputs sit side-by-side */
+  margin-bottom: 10px;
+}
+
+button {
+  display: block;
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
   margin-top: 20px;
 }
 
-.nav-buttons {
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Pagination controls */
+.pagination-controls {
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  gap: 2mm;  /* 2mm space between buttons */
-  width: 100%;
-  max-width: 800px;  /* Limit the width */
-  padding: 10px;
-}
-
-.nav-buttons a {
-  text-decoration: none;
-  font-size: 16px;
-  color: white;
-}
-
-.nav-buttons .btn {
-  padding: 10px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.btn-dashboard {
-  background-color: #4CAF50; /* Green */
-}
-
-.btn-financial {
-  background-color: #2196F3; /* Blue */
-}
-
-.btn-stocks {
-  background-color: #f39c12; /* Orange */
-}
-
-.btn-macro {
-  background-color: #9b59b6; /* Purple */
-}
-
-.btn-corporate {
-  background-color: #e74c3c; /* Red */
-}
-
-.nav-buttons .btn:hover {
-  opacity: 0.9;
-}
-
-.container div {
-  text-align: center;
 }

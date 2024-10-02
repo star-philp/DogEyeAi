@@ -1,0 +1,255 @@
+ERROR:root:Error fetching financial data: 4 validation errors for FinancialDataResponse
+data.0
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075c2b50>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.1
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075c2bd0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.2
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075c2c50>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.3
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075c2cd0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+ERROR:root:Error fetching financial data: 7 validation errors for FinancialDataResponse
+data.0
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075e8d10>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.1
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075e9210>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.2
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075e9290>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.3
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075e9310>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.4
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075e9390>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.5
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075e9450>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.6
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075e94d0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+ERROR:root:Error fetching financial data: 7 validation errors for FinancialDataResponse
+data.0
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075fc450>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.1
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075fc910>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.2
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075fc990>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.3
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075fca10>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.4
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075fca90>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.5
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075fcb50>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.6
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075fcbd0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+ERROR:root:Error fetching financial data: 7 validation errors for FinancialDataResponse
+data.0
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075fedd0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.1
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075ff290>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.2
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075ff310>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.3
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075ff390>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.4
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075ff410>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.5
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075ff4d0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.6
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075ff550>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+ERROR:root:Error fetching financial data: 7 validation errors for FinancialDataResponse
+data.0
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1076057d0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.1
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x107605c90>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.2
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x107605d10>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.3
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x107605d90>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.4
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x107605e10>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.5
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x107605ed0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.6
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x107605f50>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+ERROR:root:Error fetching financial data: 7 validation errors for FinancialDataResponse
+data.0
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760c150>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.1
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760c610>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.2
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760c690>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.3
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760c710>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.4
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760c790>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.5
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760c850>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.6
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760c8d0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+ERROR:root:Error fetching financial data: 7 validation errors for FinancialDataResponse
+data.0
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075fd950>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.1
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075ff250>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.2
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075fee50>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.3
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075ff310>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.4
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075fef10>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.5
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075fda50>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.6
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075ff410>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+ERROR:root:Error fetching financial data: 7 validation errors for FinancialDataResponse
+data.0
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760d550>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.1
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760ded0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.2
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760d8d0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.3
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760d810>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.4
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760d710>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.5
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760dbd0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.6
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760d890>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+ERROR:root:Error fetching financial data: 7 validation errors for FinancialDataResponse
+data.0
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760ee10>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.1
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760f2d0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.2
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760f350>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.3
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760f3d0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.4
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760f450>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.5
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760f510>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.6
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760f590>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+ERROR:root:Error fetching financial data: 7 validation errors for FinancialDataResponse
+data.0
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x107618b10>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.1
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x107618fd0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.2
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x107619050>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.3
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1076190d0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.4
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x107619150>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.5
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x107619210>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.6
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x107619290>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+ERROR:root:Error fetching financial data: 7 validation errors for FinancialDataResponse
+data.0
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x1075c3d90>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.1
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760ec90>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.2
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760ffd0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.3
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760e410>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.4
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760da90>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.5
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760dfd0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.6
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760f0d0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+ERROR:root:Error fetching financial data: 7 validation errors for FinancialDataResponse
+data.0
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760c710>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.1
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760d810>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.2
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760d950>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.3
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760d610>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.4
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760dbd0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.5
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760d890>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type
+data.6
+  Input should be a valid dictionary or instance of FinancialStatementResponse [type=model_type, input_value=<financial_api.FinancialS...t object at 0x10760dad0>, input_type=FinancialStatement]
+    For further information visit https://errors.pydantic.dev/2.9/v/model_type

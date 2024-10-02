@@ -1,6 +1,7 @@
 // src/components/CorporateData.js
 import React, { useState, useEffect } from 'react';
 import axios from '../services/api';
+import { getFinancialData, getStockData } from '../services/api';
 
 function CorporateData() {
     const [corporateNews, setCorporateNews] = useState([]);
