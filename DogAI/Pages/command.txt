@@ -1,0 +1,94 @@
+실행 타입
+>streamlit run main10+db+visual.py
+'''''''''''''''''''''''''''''''''''''
+(base) rainstar@wooui-MacBookPro DogAI % source bin/activate
+(DogAI) (base) rainstar@wooui-MacBookPro DogAI %
+(DogAI) (base) rainstar@wooui-MacBookPro pages %/Users/rainstar/Project/Python/DogAI/pages : ain10+db+visual.py                             test3.py
+(DogAI) (base) rainstar@wooui-MacBookPro pages % streamlit run main10+db+visual.py
+
+======================================
+캐시지우기
+rm -rf ~/.streamlit/cache
+streamlit run your_script.py --clear-cache
+'''''''''''''''''''
+
+
+
+'''''''''''''''''''''
+(base) rainstar@wooui-MacBookPro VocLangChain % psql productvector
+productvector=# CREATE DATABASE dog_health;
+CREATE DATABASE
+
+productvector=# CREATE USER rainstar WITH PASSWORD '12341234';
+
+productvector=# GRANT ALL PRIVILEGES ON DATABASE dog_health TO rainstar;
+GRANT
+
+productvector=# \c dog_health
+
+dog_health=# \d
+                   List of relations
+ Schema |          Name           |   Type   |  Owner
+--------+-------------------------+----------+----------
+ public | analysis_results        | table    | rainstar
+ public | analysis_results_id_seq | sequence | rainstar
+(2 rows)
+
+dog_health=# \l
+                               List of databases
+     Name      |  Owner   | Encoding | Collate | Ctype |   Access privileges
+---------------+----------+----------+---------+-------+-----------------------
+ dog_health    | rainstar | UTF8     | C       | C     | =Tc/rainstar         +
+               |          |          |         |       | rainstar=CTc/rainstar
+ postgres      | rainstar | UTF8     | C       | C     |
+ productvector | rainstar | UTF8     | C       | C     |
+ template0     | rainstar | UTF8     | C       | C     | =c/rainstar          +
+               |          |          |         |       | rainstar=CTc/rainstar
+ template1     | rainstar | UTF8     | C       | C     | =c/rainstar          +
+
+dog_health=# \t
+Tuples only is on.
+
+
+dog_health=# SELECT * FROM analysis_results;
+  1 | Positive |           1 | [0.001997317187488079, 0.9980027079582214] | 2024-08-19 11:24:39.277414
+
+dog_health=#
+dog_health=# SELECT * FROM analysis_results WHERE class = 'Positive';
+  1 | Positive |           1 | [0.001997317187488079, 0.9980027079582214] | 2024-08-19 11:24:39.277414
+
+
+dog_health=# SELECT COUNT(*), class FROM analysis_results GROUP BY class;
+     1 | Positive
+
+
+ dog_health=# \l
+ dog_health    | rainstar | UTF8     | C       | C     | =Tc/rainstar         +
+               |          |          |         |       | rainstar=CTc/rainstar
+ postgres      | rainstar | UTF8     | C       | C     |
+ productvector | rainstar | UTF8     | C       | C     |
+ template0     | rainstar | UTF8     | C       | C     | =c/rainstar          +
+               |          |          |         |       | rainstar=CTc/rainstar
+ template1     | rainstar | UTF8     | C       | C     | =c/rainstar          +
+               |          |          |         |       | rainstar=CTc/rainstar
+ voc_db        | rainstar | UTF8     | C       | C     |
+
+=============================
+(DogAI) (base) rainstar@MacBookPro pages % streamlit run main10+db+visual.py
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8502
+  Network URL: http://192.168.219.182:8502
+
+/Users/rainstar/Project/Python/DogAI/Pages/db_handler.py:64: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  data = pd.read_sql(query, conn)
+/Users/rainstar/Project/Python/DogAI/Pages/db_handler.py:64: UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+  data = pd.read_sql(query, conn)
+  ==========================
+
+  (DogAI) (base) rainstar@MacBookPro pages % streamlit run main10+db+visual.py
+
+  ==============================
+ 
+     

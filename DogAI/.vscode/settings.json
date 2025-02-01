@@ -1,0 +1,5 @@
+{
+    "reactSnippets.settings.prettierEnabled": true,
+    "editor.formatOnSave": true,
+    "notebook.formatOnSave.enabled": true
+}
