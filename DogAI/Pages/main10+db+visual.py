@@ -13,6 +13,9 @@ from reportlab.pdfgen import canvas
 from reportlab.lib import colors
 from reportlab.lib.units import inch
 import io
+from analyzers.health_analyzer import HealthAnalyzer
+from reports.report_generator import PDFReportGenerator
+from visualizers.data_visualizer import PlotlyVisualizer
 
 # Path to your model file
 model_path = os.path.join(os.path.dirname(__file__), '..', 'models', 'best_model.pkl')
@@ -63,64 +66,68 @@ def overlay_heatmap_on_image(original_image, heatmap_image):
     combined_array = np.clip(np.array(original_image) + np.array(heatmap_image), 0, 255).astype(np.uint8)
     return Image.fromarray(combined_array)
 
-def severity_text(prob):
-    level = int(round(prob * 10))
-    level = min(max(level, 1), 10)
-    messages = {
-        1: "Very Low Risk: Symptoms are minimal.",
-        2: "Low Risk: Symptoms are mild.",
-        3: "Moderate Risk: Symptoms are present but manageable.",
-        4: "Somewhat High Risk: Symptoms are noticeable and should be monitored.",
-        5: "High Risk: Symptoms are significant, consult a vet.",
-        6: "Very High Risk: Symptoms are severe, immediate action is needed.",
-        7: "Critical Risk: Symptoms are critical, seek urgent veterinary care.",
-        8: "Extreme Risk: Symptoms are very severe, and immediate professional help is required.",
-        9: "Severe and Dangerous: Immediate intervention is necessary.",
-        10: "Critical and Life-threatening: Emergency care required immediately."
-    }
-    return messages.get(level, "Unknown risk level.")
-
 def display_severity_messages():
-    st.subheader("Severity Scale")
+    """심각도 메시지 표시 함수"""
+    st.subheader("심각도 척도")
+    analyzer = HealthAnalyzer()
+    
     for level in range(1, 11):
-        message = severity_text(level / 10)
-        if level == 10:
-            st.markdown(f"**{level}:** :red[{message}]")
-        else:
-            st.markdown(f"**{level}:** {message}")
+        # Positive와 Negative 케이스 모두 표시
+        pos_message = analyzer._get_severity_text(level * 10, "Positive")
+        neg_message = analyzer._get_severity_text(level * 10, "Negative")
+        
+        with st.expander(f"Level {level}", expanded=False):
+            col1, col2 = st.columns(2)
+            with col1:
+                st.markdown("**양성인 경우:**")
+                st.markdown(f"- {pos_message}")
+            with col2:
+                st.markdown("**음성인 경우:**")
+                st.markdown(f"- {neg_message}")
 
-def generate_pdf(pred_class, pred_idx, probs, severity_message, combined_image):
+def generate_pdf(pred_class, pred_idx, probs, analysis_result, combined_image):
     buffer = io.BytesIO()
     c = canvas.Canvas(buffer, pagesize=letter)
 
     c.setFont("Helvetica-Bold", 16)
-    c.drawString(100, 750, "Dog Eye Health Analysis Report")
+    c.drawString(100, 750, "강아지 눈 건강 분석 보고서")
 
     c.setFont("Helvetica", 12)
-    c.drawString(100, 720, f"Class: {pred_class}")
-    c.drawString(100, 700, f"Index: {pred_idx}")
-    c.drawString(100, 680, f"Probabilities: {probs}")
-    c.drawString(100, 660, f"Severity Message: {severity_message}")
+    c.drawString(100, 720, f"진단: {analysis_result.diagnosis}")
+    c.drawString(100, 700, f"신뢰도: {analysis_result.confidence:.2f}%")
+    
+    # 심각도 메시지 가져오기
+    severity_message = components['analyzer']._get_severity_text(
+        analysis_result.confidence,
+        analysis_result.diagnosis
+    )
+    c.drawString(100, 680, f"심각도 평가: {severity_message}")
 
-    c.drawString(100, 630, "Recommended Actions:")
-    if "Critical" in severity_message or "Life-threatening" in severity_message:
-        c.setFont("Helvetica-Bold", 12)
-        c.setFillColor(colors.red)
-        c.drawString(120, 610, "Immediate emergency care is required.")
-    else:
-        c.setFont("Helvetica", 12)
-        c.setFillColor(colors.black)
-        c.drawString(120, 610, "Monitor the symptoms and consult a veterinarian if necessary.")
+    # 권장사항
+    c.drawString(100, 630, "권장 조치사항:")
+    y_position = 610
+    for recommendation in analysis_result.recommendations:
+        c.drawString(120, y_position, f"• {recommendation}")
+        y_position -= 20
 
+    # 이미지 추가
     image_path = "combined_image.png"
     combined_image.save(image_path)
-    c.drawImage(image_path, 100, 400, width=4*inch, height=4*inch)
+    c.drawImage(image_path, 100, 200, width=4*inch, height=4*inch)
 
     c.showPage()
     c.save()
 
     buffer.seek(0)
     return buffer
+
+def initialize_components():
+    """의존성 주입 원칙(DIP)을 따르는 컴포넌트 초기화"""
+    return {
+        'analyzer': HealthAnalyzer(),
+        'report_generator': PDFReportGenerator(),
+        'visualizer': PlotlyVisualizer()
+    }
 
 # Streamlit app
 st.title("Dog Eye Health Checker")
@@ -156,75 +163,101 @@ if uploaded_file is not None:
     try:
         # Analyze Image
         pred_class, pred_idx, probs = analyze_image(image)
-        result_text = f"Analysis Output:\nClass: {pred_class}\nIndex: {pred_idx}\nProbabilities: {probs}"
-        st.text_area("Analysis Results", result_text, height=150)
-
-        # Generate and overlay the heatmap
+        components = initialize_components()
+        analysis_result = components['analyzer'].analyze(pred_class, probs)
+        
+        # 결과 텍스트 표시
+        result_text = f"""
+        분석 결과:
+        진단: {analysis_result.diagnosis}
+        신뢰도: {analysis_result.confidence:.2f}%
+        
+        권장사항:
+        {chr(10).join(f'• {rec}' for rec in analysis_result.recommendations)}
+        """
+        st.text_area("분석 결과", result_text, height=200)
+        
+        # 히트맵 생성 및 표시
         heatmap_image = generate_heatmap(image)
         combined_image = overlay_heatmap_on_image(image, heatmap_image)
-        st.image(combined_image, caption='Image with Heatmap Overlay', use_column_width=True)
-
-        # Display severity messages
-        display_severity_messages()
-
-        # Highlight severity message in a red box if critical
-        severity_message = severity_text(probs.max().item())
-        st.markdown(f"### **Conclusion:**\n**:red[{severity_message}]**")
-
-        # Save results to PostgreSQL database
+        st.image(combined_image, caption='히트맵 분석 결과', use_column_width=True)
+        
+        # 심각도 척도 표시
+        st.subheader("심각도 척도")
+        for level in range(1, 11):
+            # Positive와 Negative 케이스 모두 표시
+            pos_message = components['analyzer']._get_severity_text(level * 10, "Positive")
+            neg_message = components['analyzer']._get_severity_text(level * 10, "Negative")
+            
+            with st.expander(f"Level {level}", expanded=False):
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.markdown("**양성인 경우:**")
+                    st.markdown(f"- {pos_message}")
+                with col2:
+                    st.markdown("**음성인 경우:**")
+                    st.markdown(f"- {neg_message}")
+        
+        # 현재 분석 결과의 심각도 표시
+        st.subheader("현재 분석 결과")
+        severity_message = components['analyzer']._get_severity_text(
+            analysis_result.confidence,
+            analysis_result.diagnosis
+        )
+        
+        # 심각도에 따른 색상 설정
+        if analysis_result.severity_level >= 7:
+            st.error(f"### 진단 결과:\n{severity_message}")
+        elif analysis_result.severity_level >= 4:
+            st.warning(f"### 진단 결과:\n{severity_message}")
+        else:
+            st.success(f"### 진단 결과:\n{severity_message}")
+        
+        # PDF 다운로드 버튼
+        pdf_buffer = generate_pdf(pred_class, pred_idx, probs, analysis_result, combined_image)
+        st.download_button(
+            label="PDF 보고서 다운로드",
+            data=pdf_buffer,
+            file_name="분석_보고서.pdf",
+            mime="application/pdf"
+        )
+        
+        # 데이터베이스 저장
         conn = connect_to_db()
         create_table_if_not_exists(conn)
         save_results_to_db(conn, pred_class, pred_idx, probs)
-        st.success("Analysis complete. Results have been saved to PostgreSQL database.")
+        st.success("분석이 완료되었습니다. 결과가 데이터베이스에 저장되었습니다.")
 
-        # PDF download button
-        pdf_buffer = generate_pdf(pred_class, pred_idx, probs, severity_message, combined_image)
-        st.download_button(
-            label="Download PDF Report",
-            data=pdf_buffer,
-            file_name="analysis_report.pdf",
-            mime="application/pdf"
-        )
     except Exception as e:
-        st.error(f"An error occurred during analysis: {e}")
+        st.error(f"분석 중 오류가 발생했습니다: {e}")
     finally:
         if conn:
             close_db_connection(conn)
 
     # Display saved results from the database
-    st.subheader("Previously Saved Results")
+    st.subheader("Analysis History")
     data = load_data()
     if data is not None:
-        st.dataframe(data)
-    
-        # Class distribution visualization
-        st.subheader("Class Distribution")
-        class_distribution = data['class'].value_counts().reset_index()
-        class_distribution.columns = ['Class', 'Count']
-        st.bar_chart(class_distribution)
-
-        # Analysis over time visualization
-        st.subheader("Analysis Over Time")
-        data['analysis_time'] = pd.to_datetime(data['analysis_time'])
-        time_series = data.set_index('analysis_time').resample('D').size().reset_index()
-        time_series.columns = ['Date', 'Count']
-
-        # 차트 데이터 타입 확인 및 변환
-        st.write("Time Series Data Types:", time_series.dtypes)  # 디버깅용
-
-        # x축은 날짜, y축은 숫자 데이터만 사용하도록 수정
-        chart_data = pd.DataFrame({
-            'Count': time_series['Count'].astype(float)  # 명시적으로 float로 변환
-        }, index=time_series['Date'])
-
-        # 차트 표시
-        st.line_chart(chart_data)
-
-        # 또는 alternative로 plotly 사용
-        import plotly.express as px
-
-        fig = px.line(time_series, x='Date', y='Count', 
-                      title='Analysis Count Over Time')
-        st.plotly_chart(fig)
+        # 기본 데이터 표시
+        with st.expander("View Raw Data"):
+            st.dataframe(data)
+        
+        components = initialize_components()
+        
+        # 시계열 차트
+        try:
+            st.subheader("Analysis Trend")
+            time_series_fig = components['visualizer'].create_time_series(data)
+            st.plotly_chart(time_series_fig)
+        except Exception as e:
+            st.error(f"시계열 차트 생성 중 오류 발생: {e}")
+        
+        # 분포 차트
+        try:
+            st.subheader("Result Distribution")
+            distribution_fig = components['visualizer'].create_distribution(data)
+            st.plotly_chart(distribution_fig)
+        except Exception as e:
+            st.error(f"분포 차트 생성 중 오류 발생: {e}")
     else:
-        st.write("No data available.")
+        st.info("No previous analysis data available.")
