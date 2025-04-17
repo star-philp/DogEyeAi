@@ -89,6 +89,14 @@ dog_health=# SELECT COUNT(*), class FROM analysis_results GROUP BY class;
 
   (DogAI) (base) rainstar@MacBookPro pages % streamlit run main10+db+visual.py
 
-  ==============================
+
+============================== 2025년 3뤌 17일 배포작업
+>>conda create -n dogai_py310 python=3.10 -y
+>>
+>>cd Pages && conda activate dogai_py310 && streamlit run main10+db+visual.py
+
+
+
+
  
      

@@ -2,14 +2,22 @@ import psycopg2
 from psycopg2 import sql
 import pandas as pd
 import streamlit as st
+import os
 
 def connect_to_db():
     try:
+        host = os.environ.get('DB_HOST', 'localhost')
+        port = os.environ.get('DB_PORT', '5432')
+        dbname = os.environ.get('DB_NAME', 'dog_health')
+        user = os.environ.get('DB_USER', 'rainstar')
+        password = os.environ.get('DB_PASSWORD', '12341234')
+        
         conn = psycopg2.connect(
-            dbname="dog_health", 
-            user="rainstar", 
-            password="12341234", 
-            host="localhost"
+            dbname=dbname, 
+            user=user, 
+            password=password, 
+            host=host,
+            port=port
         )
         return conn
     except psycopg2.OperationalError as e:
