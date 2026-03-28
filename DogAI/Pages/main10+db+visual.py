@@ -145,7 +145,7 @@ st.write("""
 
 # Display a sample image
 st.subheader("Sample Image for Reference")
-sample_image_path = '/Users/rainstar/Project/Python/DogAI/images/sample_image.jpg'
+sample_image_path = os.path.join(os.path.dirname(__file__), '..', 'images', 'sample_image.jpg')
 if os.path.isfile(sample_image_path):
     sample_image = Image.open(sample_image_path)
     st.image(sample_image, caption='Sample Image: Follow these guidelines to capture a good photo.', use_column_width=True)

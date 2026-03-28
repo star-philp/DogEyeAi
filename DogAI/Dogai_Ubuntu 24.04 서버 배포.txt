@@ -1,0 +1,529 @@
+>chmod +x deploy.sh
+
+(dogai_py310) MacBookPro:DogAI rainstar$ 
+
+>./deploy.sh
+Ubuntu 서버로 배포합니다...
+프로젝트 파일 압축 중...
+Ubuntu 서버로 파일 전송 중...
+woosung@192.168.219.109's password: 
+ssh_dispatch_run_fatal: Connection to 192.168.219.109 port 2222: Broken pipe
+scp: Connection closed
+Ubuntu 서버에서 배포 명령 실행 중...
+Pseudo-terminal will not be allocated because stdin is not a terminal.
+woosung@192.168.219.109's password: woosung
+Permission denied, please try again.
+woosung@192.168.219.109's password: 
+Permission denied, please try again.
+woosung@192.168.219.109's password: 
+Received disconnect from 192.168.219.109 port 2222:2: Too many authentication failures
+Disconnected from 192.168.219.109 port 2222
+배포 스크립트 실행 완료!
+
+================= DogAI 프로젝트 설정 및 배포 가이드
+# SSH 설정 및 배포 가이드
+
+## 서버 정보
+
+- **Windows 11 서버**:
+  - IP: 192.168.219.109
+  - 포트: 2222
+  - 사용자: USER
+  - 비밀번호: 007008
+
+- **Ubuntu 24.0 서버**:
+  - 사용자: woosung
+  - 비밀번호: 007008
+
+## 1. SSH 키 생성 및 설정
+
+### Windows 서버용 SSH 키 설정
+
+1. **SSH 키 생성**:
+   ```bash
+   ./setup_ssh.sh
+   ```
+   또는 수동으로:
+   ```bash
+   ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_windows -N ""
+   ```
+
+2. **공개 키 확인**:
+   ```bash
+   cat ~/.ssh/id_rsa_windows.pub
+   ```
+
+3. **Windows 서버에 키 설정**:
+   - Windows 서버에 직접 접속
+   - `C:\Users\USER\.ssh` 디렉토리 생성
+   - `C:\Users\USER\.ssh\authorized_keys` 파일 생성 후 공개 키 내용 붙여넣기
+   - 권한 설정:
+     ```powershell
+     icacls "C:\Users\USER\.ssh\authorized_keys" /inheritance:r /grant "USER:F"
+     ```
+
+### Ubuntu 서버용 SSH 키 설정
+
+1. **SSH 키 생성**:
+   ```bash
+   ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_ubuntu -N ""
+   ```
+
+2. **공개 키 복사**:
+   ```bash
+   ssh-copy-id -i ~/.ssh/id_rsa_ubuntu woosung@[Ubuntu-서버-IP]
+   ```
+
+## 2. SSH 설정 파일 구성
+
+`~/.ssh/config` 파일에 다음 내용 추가:
+
+```
+Host windows-server
+    HostName 192.168.219.109
+    User USER
+    Port 2222
+    IdentityFile ~/.ssh/id_rsa_windows
+    PreferredAuthentications publickey,password
+
+Host ubuntu-server
+    HostName [Ubuntu-서버-IP]
+    User woosung
+    IdentityFile ~/.ssh/id_rsa_ubuntu
+    PreferredAuthentications publickey,password
+```
+
+## 3. 연결 테스트
+
+### Windows 서버 연결
+
+```bash
+ssh -i ~/.ssh/id_rsa_windows -p 2222 USER@192.168.219.109
+```
+또는 설정 파일 사용:
+```bash
+ssh windows-server
+```
+
+### Ubuntu 서버 연결
+
+```bash
+ssh -i ~/.ssh/id_rsa_ubuntu woosung@[Ubuntu-서버-IP]
+```
+또는 설정 파일 사용:
+```bash
+ssh ubuntu-server
+```
+
+## 4. 애플리케이션 배포
+
+### 패키지 설치
+
+로컬에서 필요한 패키지 설치:
+```bash
+./setup_packages.sh
+```
+
+### Windows 서버 배포
+
+```bash
+./deploy_windows.sh
+```
+
+### Ubuntu 서버 배포
+
+Ubuntu 서버 IP 주소 설정 후:
+```bash
+./deploy_ubuntu.sh
+```
+
+## 5. 문제 해결
+
+### NumPy 호환성 문제
+
+NumPy 2.x와 호환성 문제가 있는 경우:
+```bash
+pip install numpy==1.24.3
+```
+
+### 누락된 패키지 설치
+
+필요한 패키지가 누락된 경우:
+```bash
+pip install reportlab plotly
+```
+
+### Docker 컨테이너 관리
+
+```bash
+# 컨테이너 상태 확인
+docker ps
+
+# 컨테이너 재시작
+docker-compose restart app
+
+# 컨테이너 중지 및 제거
+docker-compose down
+
+# 컨테이너 시작
+docker-compose up -d
+```
+
+### 로그 확인
+
+```bash
+# 애플리케이션 로그
+docker logs dogai_app
+
+# 데이터베이스 로그
+docker logs dogai_db
+```
+
+
+============================
+# SSH 설정 및 배포 가이드
+
+## 서버 정보
+
+- **Windows 11 서버**:
+  - IP: 192.168.219.109
+  - 포트: 2222
+  - 사용자: USER
+  - 비밀번호: 007008
+
+- **Ubuntu 24.0 서버**:
+  - 사용자: woosung
+  - 비밀번호: 007008
+
+## 1. SSH 키 생성 및 설정
+
+### Windows 서버용 SSH 키 설정
+
+1. **SSH 키 생성**:
+   ```bash
+   ./setup_ssh.sh
+   ```
+   또는 수동으로:
+   ```bash
+   ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_windows -N ""
+   ```
+
+2. **공개 키 확인**:
+   ```bash
+   cat ~/.ssh/id_rsa_windows.pub
+   ```
+
+3. **Windows 서버에 키 설정**:
+   - Windows 서버에 직접 접속
+   - `C:\Users\USER\.ssh` 디렉토리 생성
+   - `C:\Users\USER\.ssh\authorized_keys` 파일 생성 후 공개 키 내용 붙여넣기
+   - 권한 설정:
+     ```powershell
+     icacls "C:\Users\USER\.ssh\authorized_keys" /inheritance:r /grant "USER:F"
+     ```
+
+### Ubuntu 서버용 SSH 키 설정
+
+1. **SSH 키 생성**:
+   ```bash
+   ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_ubuntu -N ""
+   ```
+
+2. **공개 키 복사**:
+   ```bash
+   ssh-copy-id -i ~/.ssh/id_rsa_ubuntu woosung@[Ubuntu-서버-IP]
+   ```
+
+## 2. SSH 설정 파일 구성
+
+`~/.ssh/config` 파일에 다음 내용 추가:
+
+```
+Host windows-server
+    HostName 192.168.219.109
+    User USER
+    Port 2222
+    IdentityFile ~/.ssh/id_rsa_windows
+    PreferredAuthentications publickey,password
+
+Host ubuntu-server
+    HostName [Ubuntu-서버-IP]
+    User woosung
+    IdentityFile ~/.ssh/id_rsa_ubuntu
+    PreferredAuthentications publickey,password
+```
+
+## 3. 연결 테스트
+
+### Windows 서버 연결
+
+```bash
+ssh -i ~/.ssh/id_rsa_windows -p 2222 USER@192.168.219.109
+```
+또는 설정 파일 사용:
+```bash
+ssh windows-server
+```
+
+### Ubuntu 서버 연결
+
+```bash
+ssh -i ~/.ssh/id_rsa_ubuntu woosung@[Ubuntu-서버-IP]
+```
+또는 설정 파일 사용:
+```bash
+ssh ubuntu-server
+```
+
+## 4. 애플리케이션 배포
+
+### 패키지 설치
+
+로컬에서 필요한 패키지 설치:
+```bash
+./setup_packages.sh
+```
+
+### Windows 서버 배포
+
+```bash
+./deploy_windows.sh
+```
+
+### Ubuntu 서버 배포
+
+Ubuntu 서버 IP 주소 설정 후:
+```bash
+./deploy_ubuntu.sh
+```
+
+## 5. 문제 해결
+
+### NumPy 호환성 문제
+
+NumPy 2.x와 호환성 문제가 있는 경우:
+```bash
+pip install numpy==1.24.3
+```
+
+### 누락된 패키지 설치
+
+필요한 패키지가 누락된 경우:
+```bash
+pip install reportlab plotly
+```
+
+### Docker 컨테이너 관리
+
+```bash
+# 컨테이너 상태 확인
+docker ps
+
+# 컨테이너 재시작
+docker-compose restart app
+
+# 컨테이너 중지 및 제거
+docker-compose down
+
+# 컨테이너 시작
+docker-compose up -d
+```
+
+### 로그 확인
+
+```bash
+# 애플리케이션 로그
+docker logs dogai_app
+
+# 데이터베이스 로그
+docker logs dogai_db
+
+=============
+
+[1. 서버 정보 수정 완료]
+서버 정보가 올바르게 수정되었습니다:
+    Windows 11 서버: 사용자 계정은 'USER'
+    Ubuntu 24.0 서버: 사용자 계정은 'woosung'
+
+[2. 생성된 파일 목록]
+다음 파일들이 생성되었습니다:
+
+1. SSH 설정 파일:
+    windows_ssh_guide.md: Windows 서버 SSH 연결 가이드
+    ubuntu_ssh_guide.md: Ubuntu 서버 SSH 연결 가이드
+    ssh_setup_guide.md: 종합 SSH 설정 가이드
+
+2. 배포 스크립트:
+    deploy_windows.sh: Windows 서버 배포 스크립트
+    deploy_ubuntu.sh: Ubuntu 서버 배포 스크립트
+    setup_ssh.sh: SSH 키 설정 스크립트
+
+3. Docker 설정 파일:
+    docker-compose.yml: Docker Compose 설정
+    Dockerfile: Docker 이미지 빌드 설정
+    .dockerignore: Docker 빌드 제외 파일
+
+4. 패키지 관리 파일:
+requirements.txt: 필요한 Python 패키지 목록
+setup_packages.sh: 패키지 설치 스크립트
+
+
+[3. 애플리케이션 실행 문제 해결]
+로그에서 발견된 문제와 해결 방법:
+
+
+1. NumPy 호환성 문제
+   A module that was compiled using NumPy 1.x cannot be run in NumPy 2.2.4
+해결: NumPy를 1.24.3 버전으로 다운그레이드
+
+2. 누락된 패키지
+   ModuleNotFoundError: No module named 'reportlab'
+   ModuleNotFoundError: No module named 'plotly'
+해결: reportlab 및 plotly 패키지 설치
+
+3. torch 관련 오류
+      ImportError: cannot import name 'NP_SUPPORTED_MODULES' from 'torch._dynamo.utils'
+해결: torch 및 torchvision 버전 다운그레이드
+
+1. SSH 설정 파일:
+    windows_ssh_guide.md: Windows 서버 SSH 연결 가이드
+    ubuntu_ssh_guide.md: Ubuntu 서버 SSH 연결 가이드
+    ssh_setup_guide.md: 종합 SSH 설정 가이드
+
+2. 배포 스크립트:
+    deploy_windows.sh: Windows 서버 배포 스크립트
+    deploy_ubuntu.sh: Ubuntu 서버 배포 스크립트
+    setup_ssh.sh: SSH 키 설정 스크립트
+
+3. Docker 설정 파일:
+    docker-compose.yml: Docker Compose 설정
+    Dockerfile: Docker 이미지 빌드 설정
+    .dockerignore: Docker 빌드 제외 파일
+
+4. 패키지 관리 파일:
+    requirements.txt: 필요한 Python 패키지 목록
+    setup_packages.sh: 패키지 설치 스크립트
+
+
+[4. 설치 및 배포 방법]
+
+1. 패키지 설치
+       ./setup_packages.sh
+
+2. SSH 키 설정
+   ./setup_ssh.sh  # Windows 서버용
+   ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_ubuntu -N ""  # Ubuntu 서버용
+
+배포 실행
+   ./setup_ssh.sh  # Windows 서버용
+   ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_ubuntu -N ""  # Ubuntu 서버용
+
+[5. 주의사항]
+Ubuntu 서버 배포 시 deploy_ubuntu.sh 파일에서 [Ubuntu-서버-IP] 부분을 실제 IP 주소로 변경해야 합니다.
+SSH 연결 시 ssh-copy-id 명령에서 [Ubuntu-서버-IP] 부분을 실제 IP 주소로 변경해야 합니다.
+Docker 컨테이너 실행 시 필요한 환경 변수는 docker-compose.yml 파일에 설정되어 있습니다.
+모든 설정이 완료되었습니다. 이제 DogAI 애플리케이션을 로컬에서 실행하거나 서버에 배포할 수 있습니다
+
+================================= 실행
+>ls -la
+drwxr-xr-x@  3 rainstar  staff      96 Oct 17 04:26 etc
+drwxr-xr-x   3 rainstar  staff      96 Aug 19  2024 images
+drwxr-xr-x@  3 rainstar  staff      96 Oct 17 04:23 include
+drwxr-xr-x@  3 rainstar  staff      96 Oct 17 04:23 lib
+drwxr-xr-x   3 rainstar  staff      96 Aug  8  2024 models
+-rw-r--r--@  1 rainstar  staff     238 Oct 17 04:23 pyvenv.cfg
+-rw-r--r--@  1 rainstar  staff     481 Mar 18 00:30 requirements.txt
+-rwxr-xr-x@  1 rainstar  staff     896 Mar 18 00:30 setup_packages.sh
+-rwxr-xr-x@  1 rainstar  staff     780 Mar 18 00:19 setup_ssh.sh
+drwxr-xr-x@  4 rainstar  staff     128 Feb  2 01:03 share
+-rw-r--r--@  1 rainstar  staff    2798 Mar 18 00:31 ssh_setup_guide.md
+-rw-r--r--@  1 rainstar  staff    3740 Mar 18 00:19 ubuntu_ssh_guide.md
+-rw-r--r--@  1 rainstar  staff    2848 Mar 17 22:01 windows_manual_deploy.md
+-rw-r--r--@  1 rainstar  staff    3788 Mar 18 00:19 windows_ssh_guide.md
+-rw-r--r--@  1 rainstar  staff  188660 Feb  2 01:46 분석_보고서.pdf
+(dogai_py310) MacBookPro:DogAI rainstar$
+
+>./setup_packages.sh
+
+># DogAI 애플리케이션 의존성 패키지 (requirements.txt)
+# 핵심 패키지
+torch==2.0.1
+torchvision==0.15.2
+fastai==2.7.12
+streamlit==1.27.0
+
+# 데이터 처리 및 시각화
+numpy==1.24.3  # NumPy 2.x 호환성 문제 해결
+pandas==2.0.3
+plotly==5.18.0
+matplotlib==3.7.3
+pillow>=7.1.0,<10.0.0  # 버전 충돌 해결
+
+# 보고서 생성
+reportlab==4.0.7
+
+# 데이터베이스
+psycopg2-binary==2.9.9
+sqlalchemy==2.0.23
+
+# 유틸리티
+python-dotenv==1.0.0
+watchdog==3.0.0  # Streamlit 파일 변경 감지 성능 향상
+
+
+>./setup_packages.sh
+Attempting uninstall: fastai
+    Found existing installation: fastai 2.7.19
+    Uninstalling fastai-2.7.19:
+      Successfully uninstalled fastai-2.7.19
+Successfully installed fastai-2.7.12 fastcore-1.5.55 greenlet-3.1.1 importlib-metadata-6.11.0 matplotlib-3.7.3 packaging-23.2 pandas-2.0.3 pillow-9.5.0 plotly-5.18.0 protobuf-4.25.6 psycopg2-binary-2.9.9 python-dotenv-1.0.0 reportlab-4.0.7 sqlalchemy-2.0.23 streamlit-1.27.0 tenacity-8.5.0 torch-2.0.1 torchvision-0.15.2 tzlocal-5.3.1 validators-0.34.0 watchdog-3.0.0 zipp-3.21.0
+Watchdog 설치 중...
+xcode-select: note: Command line tools are already installed. Use "Software Update" in System Settings or the softwareupdate command line interface to install updates
+Requirement already satisfied: watchdog in /Users/rainstar/opt/anaconda3/envs/dogai_py310/lib/python3.10/site-packages (3.0.0)
+패키지 설치가 완료되었습니다.
+이제 다음 명령으로 애플리케이션을 실행할 수 있습니다:
+
+>>cd Pages && conda activate dogai_py310 && streamlit run main10+db+visual.py
+==========
+
+컬 테스트:
+웹 브라우저에서 http://localhost:8501로 접속하여 애플리케이션을 확인하세요.
+네트워크 URL(예: http://192.168.219.105:8501)을 통해 같은 네트워크의 다른 기기에서도 접근할 수 있습니다.
+
+http://localhost:8502
+=========== 4월 18일
+
+구글 드라이브 파일 공유
+https://drive.google.com/file/d/1Js5_j9Gwlu083SbNhxYhKdFhGZlbE2O4/view?usp=sharing
+
+
+========== 암호 공개 키
+PS /Users/rainstar/Project/Python/DogAI> ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa_windows -N ""
+Generating public/private rsa key pair.
+/Users/rainstar/.ssh/id_rsa_windows already exists.
+Overwrite (y/n)?  y
+Your identification has been saved in /Users/rainstar/.ssh/id_rsa_windows
+Your public key has been saved in /Users/rainstar/.ssh/id_rsa_windows.pub
+The key fingerprint is:
+SHA256:j+GlpP5kai02YleT7/qRAEIn26o6VNM+BTMBQC3Q2k8 rainstar@wooui-MacBookPro.local
+The key's randomart image is:
++---[RSA 4096]----+
+|++o.+.o          |
+| ..o O           |
+| o. + *          |
+|. .oE+ o         |
+|  .o+ . S..      |
+| . ..o ++B .     |
+|. .   oo*o+      |
+|..  o.*+. ..     |
+|.. . =o+o+o      |
++----[SHA256]-----+
+
+======== 
+PS /Users/rainstar/Project/Python/DogAI> cat ~/.ssh/id_rsa_windows.pub
+
+생성된 공개 키 
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDGhHUBn0cikABFUJID0vqRbR1gy+AO9q0agKBq0pRagA0gP9aLtzKF/jflEcvJxlFpeKFHUUy2XzqvSM2jMe2YM7ikk/JM25JucF9fjPMKJZTU8YFhgHCIi2o/yV5pIudz9KCPYv9b30wJM7qXqHZ+ExzMoT1lQPZ8nTH/Hgau1mUdXOFL1sr+IcgjDOCOPRsHLwsi3H5uvhyTYTa8Ml5MiLWKGmw2e/kXeCtFyxK1i99n0MmP6RysJgfOAtkE1DEyjgp3/eFG39uhgJGlcfxux28MC4PIV+KeoA5Z/uFNV7TXhlxtQsoq39DLSv3/GdaGa93+wQKwqfBOWVc/Z4gHWdCLO+7dh5KTrX9oHbV2bSiBbSsfE8JIFevnD57OzRvFX6ggSjEkOGj2LJY70ETJXmGKouHM629WO6RSRssd3TDBWp6iyadDxL9BCL9SnQhlUUXeoEjsYXY++PV4lOuo4klO38b9LEY2DpB6Vz5SHenwY0o2zkbtS5kTpNqIDAjDD4aBvaedkecuK3rRvaF3FgeY3kUnx0BX+/AxEgYcfkIxEtwEhi/+P8Xlb68AO7qDrLO4yWwpxkr+17SDjAXR93rgvHGxdjLwbyE5AyEJdkCva88lFVF0wL/qTVqBa12b5SxG91LYtSCCkfQ3yvQW6spsb0e3b8b3sQZ4+Sq/sQ== rainstar@wooui-MacBookPro.local
+
+
+================

@@ -1,11 +1,14 @@
+-    conda activate dogai_py310
+
+-    cd Pages && streamlit run main10+db+visual.py
+
 실행 타입
 >streamlit run main10+db+visual.py
 '''''''''''''''''''''''''''''''''''''
-(base) rainstar@wooui-MacBookPro DogAI % source bin/activate
-(DogAI) (base) rainstar@wooui-MacBookPro DogAI %
-(DogAI) (base) rainstar@wooui-MacBookPro pages %/Users/rainstar/Project/Python/DogAI/pages : ain10+db+visual.py                             test3.py
-(DogAI) (base) rainstar@wooui-MacBookPro pages % streamlit run main10+db+visual.py
 
+streamlit run main10+db+visual.py --server.port 8502 --server.address=0.0.0.0 --server.enableCORS=false
+
+http://localhost:8502
 ======================================
 캐시지우기
 rm -rf ~/.streamlit/cache

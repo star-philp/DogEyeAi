@@ -6,11 +6,11 @@ import os
 
 def connect_to_db():
     try:
-        host = os.environ.get('DB_HOST', 'localhost')
-        port = os.environ.get('DB_PORT', '5432')
+        host = os.environ.get('DB_HOST', 'host.docker.internal')
+        port = os.environ.get('DB_PORT', '5433')
         dbname = os.environ.get('DB_NAME', 'dog_health')
         user = os.environ.get('DB_USER', 'rainstar')
-        password = os.environ.get('DB_PASSWORD', '12341234')
+        password = os.environ.get('DB_PASSWORD', '007008')
         
         conn = psycopg2.connect(
             dbname=dbname, 

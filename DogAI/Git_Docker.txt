@@ -1,0 +1,75 @@
+mv .github/workflows/ocker-build-deploy.yml .github/workflows/docker-build-deploy.yml
+
+find . -name ".dockerignore"
+
+# Windows 서버에서 Docker 빌드 가이드
+
+## Docker 빌드 오류 해결 방법
+
+Windows 서버에서 Docker 이미지 빌드 시 RPC 오류가 발생할 경우 다음 단계를 수행하세요.
+
+### 1. .dockerignore 파일 문제 해결
+
+```powershell
+# .dockerignore 파일이 있는 경우 이름 변경 (임시로 비활성화)
+Rename-Item .dockerignore .dockerignore.bak
+```
+
+### 2. Docker BuildKit 비활성화
+
+Docker Desktop에서 다음과 같이 BuildKit을 비활성화합니다:
+
+1. Docker Desktop 앱 실행
+2. 설정(Settings) 메뉴 클릭
+3. Docker Engine 탭 선택
+4. 다음 설정 추가 또는 수정:
+   ```json
+   {
+     "buildkit": false
+   }
+   ```
+5. Apply & Restart 버튼 클릭
+
+### 3. Windows 서버에서 빌드 및 실행
+
+```powershell
+# 1. DogAI 디렉토리로 이동
+cd C:\Users\USER\DogAI
+
+# 2. Docker 이미지 빌드
+docker build -t dogeyeai .
+
+# 3. Docker 컨테이너 실행 (빌드가 성공적으로 완료된 후)
+docker run -d --name dogai_app -p 7000:8501 dogeyeai
+```
+
+### 4. 다른 해결 방법
+
+만약 위 방법으로도 문제가 해결되지 않는다면 다음을 시도해보세요:
+
+1. Docker Desktop 재시작
+2. 기본 이미지 미리 풀하기
+   ```powershell
+   docker pull python:3.10-slim
+   ```
+3. 컴퓨터 재시작
+4. Docker 데몬 재시작
+   ```powershell
+   Restart-Service *docker*
+   ```
+
+## 애플리케이션 접속
+
+빌드 및 실행이 성공적으로 완료되면 다음 URL로 접속할 수 있습니다:
+
+```
+http://192.168.219.109:7000
+```
+================
+tar -czvf dogai.tar.gz *
+
+ls -lh dogai.tar.gz
+
+(base) wooui-MacBookPro:DogAI rainstar$ ls -lh dogai.tar.gz
+-rw-r--r--@ 1 rainstar  staff   243M Apr 18 18:04 dogai.tar.gz
+

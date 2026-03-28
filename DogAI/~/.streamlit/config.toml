@@ -1,0 +1,16 @@
+[server]
+address = "192.168.219.103"
+port = 9000
+enableCORS = false
+enableXsrfProtection = false
+enableWebsocketCompression = false
+maxUploadSize = 200
+headless = true
+
+[browser]
+serverAddress = "192.168.219.103"
+serverPort = 9000
+
+[global]
+logLevel = "debug"
+developmentMode = false 

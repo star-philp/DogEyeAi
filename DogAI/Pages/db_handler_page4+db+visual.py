@@ -8,8 +8,9 @@ def connect_to_db():
         conn = psycopg2.connect(
             dbname="dog_health", 
             user="rainstar", 
-            password="12341234", 
-            host="localhost"
+            password="007008", 
+            host="host.docker.internal",
+            port="5433"
         )
         return conn
     except psycopg2.OperationalError as e:
