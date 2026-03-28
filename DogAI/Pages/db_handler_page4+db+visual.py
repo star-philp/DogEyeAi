@@ -5,13 +5,23 @@ import streamlit as st
 
 def connect_to_db():
     try:
-        conn = psycopg2.connect(
-            dbname="dog_health", 
-            user="rainstar", 
-            password="007008", 
-            host="host.docker.internal",
-            port="5433"
-        )
+        if "database" in st.secrets:
+            secrets = st.secrets["database"]
+            conn = psycopg2.connect(
+                dbname=secrets.get("DB_NAME", "postgres"), 
+                user=secrets.get("DB_USER", "postgres"), 
+                password=secrets.get("DB_PASSWORD", ""), 
+                host=secrets.get("DB_HOST", "db.xrlwfdazmevlqgozkecc.supabase.co"),
+                port=secrets.get("DB_PORT", "5432")
+            )
+        else:
+            conn = psycopg2.connect(
+                dbname="dog_health", 
+                user="rainstar", 
+                password="007008", 
+                host="host.docker.internal",
+                port="5433"
+            )
         return conn
     except psycopg2.OperationalError as e:
         st.error(f"Database connection failed: {e}")
