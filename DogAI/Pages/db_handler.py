@@ -6,11 +6,20 @@ import os
 
 def connect_to_db():
     try:
-        host = os.environ.get('DB_HOST', 'host.docker.internal')
-        port = os.environ.get('DB_PORT', '5433')
-        dbname = os.environ.get('DB_NAME', 'dog_health')
-        user = os.environ.get('DB_USER', 'rainstar')
-        password = os.environ.get('DB_PASSWORD', '007008')
+        # Use st.secrets if available (for Streamlit Cloud), otherwise use environment variables
+        if "database" in st.secrets:
+            secrets = st.secrets["database"]
+            host = secrets.get("DB_HOST", "db.xrlwfdazmevlqgozkecc.supabase.co")
+            port = secrets.get("DB_PORT", "5432")
+            dbname = secrets.get("DB_NAME", "postgres")
+            user = secrets.get("DB_USER", "postgres")
+            password = secrets.get("DB_PASSWORD", "")
+        else:
+            host = os.environ.get('DB_HOST', 'host.docker.internal')
+            port = os.environ.get('DB_PORT', '5433')
+            dbname = os.environ.get('DB_NAME', 'dog_health')
+            user = os.environ.get('DB_USER', 'rainstar')
+            password = os.environ.get('DB_PASSWORD', '007008')
         
         conn = psycopg2.connect(
             dbname=dbname, 
