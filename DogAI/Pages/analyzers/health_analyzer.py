@@ -14,7 +14,7 @@ class HealthAnalyzer:
     
     def analyze(self, pred_class: str, probs: np.ndarray) -> AnalysisResult:
         confidence = float(probs.max()) * 100
-        severity = self._calculate_severity(confidence)
+        severity = self._calculate_severity(confidence, pred_class)
         recommendations = self._get_recommendations(pred_class, severity)
         
         return AnalysisResult(
@@ -24,8 +24,11 @@ class HealthAnalyzer:
             severity_level=severity
         )
     
-    def _calculate_severity(self, confidence: float) -> int:
-        return min(max(int(confidence / 10), 1), 10)
+    def _calculate_severity(self, confidence: float, pred_class: str) -> int:
+        level = min(max(int(confidence / 10), 1), 10)
+        if pred_class == "Negative":
+            return 11 - level
+        return level
     
     def _get_recommendations(self, pred_class: str, severity: int) -> List[str]:
         if pred_class == "Positive":
@@ -41,7 +44,7 @@ class HealthAnalyzer:
 
     def _get_severity_text(self, confidence: float, pred_class: str) -> str:
         """신뢰도와 예측 클래스에 따른 맞춤형 심각도 메시지 반환"""
-        level = self._calculate_severity(confidence)
+        level = self._calculate_severity(confidence, pred_class)
         
         if pred_class == "Positive":
             messages = {
