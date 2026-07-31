@@ -226,7 +226,10 @@ if uploaded_file is not None:
         conn = connect_to_db()
         create_table_if_not_exists(conn)
         save_results_to_db(conn, pred_class, pred_idx, probs)
-        st.success("분석이 완료되었습니다. 결과가 데이터베이스에 저장되었습니다.")
+        if conn:
+            st.success("분석이 완료되었습니다. 결과가 데이터베이스에 저장되었습니다.")
+        else:
+            st.info("데이터베이스가 설정되지 않아 이력이 저장되지 않습니다. (분석 기능은 정상 이용 가능)")
 
     except Exception as e:
         st.error(f"분석 중 오류가 발생했습니다: {e}")
