@@ -4,8 +4,17 @@ import pandas as pd
 import streamlit as st
 import os
 
+def is_db_configured():
+    """DB 연결 정보가 설정되어 있는지 확인"""
+    if "database" in st.secrets:
+        return True
+    return bool(os.environ.get('DB_HOST'))
+
 def connect_to_db():
     try:
+        if not is_db_configured():
+            return None
+
         # Use st.secrets if available (for Streamlit Cloud), otherwise use environment variables
         if "database" in st.secrets:
             secrets = st.secrets["database"]
